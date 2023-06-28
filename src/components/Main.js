@@ -7,11 +7,11 @@ const Main = () => {
   const [contacts , setContacts] = useState([])
   const postHandler =async (info)=>{
     try {
-      await axios.post('http://localhost:3003/contacts' , {
+      await axios.post('http://localhost:3001/contacts' , {
         ...info ,
         id : Math.random()
       })
-      const contacts1 = await axios.get('http://localhost:3003/contacts')
+      const contacts1 = await axios.get('http://localhost:3001/contacts')
       setContacts(contacts1.data)
       console.log(contacts1.data);
     } catch (error) {
@@ -21,8 +21,8 @@ const Main = () => {
   const deleteHandler =async (id)=>{
     try {
       await axios
-      .delete(`http://localhost:3003/contacts/${id}`)
-      const contacts1 =  await axios.get('http://localhost:3003/contacts')
+      .delete(`http://localhost:3001/contacts/${id}`)
+      const contacts1 =  await axios.get('http://localhost:3001/contacts')
       // console.log(contacts1.data);
       setContacts(contacts1.data)
     } catch (error) {
@@ -32,8 +32,7 @@ const Main = () => {
   useEffect(()=>{
     const getContacts = async ()=>{
       try {
-        const contacts1 = await axios.get('http://localhost:3003/contacts')
-        // console.log(contacts1.data);
+        const contacts1 = await axios.get('http://localhost:3001/contacts')
         setContacts(contacts1.data)
       } catch (error) {
         console.log(error);
@@ -41,6 +40,7 @@ const Main = () => {
     }
     getContacts()
   },[])
+ 
   return (
     <div className="main">
       <AddContact postHandler={postHandler} />
